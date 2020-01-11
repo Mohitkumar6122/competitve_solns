@@ -1,111 +1,32 @@
-// Codechef January Challenge 2020 Division 2  ; #1
-// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
-// ░░░░░░░▄▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▄░░░░░░
-// ░░░░░░█░░▄▀▀▀▀▀▀▀▀▀▀▀▀▄░░█░░░░░
-// ░░░░░░█░█░░▀░░░░░░░░▀░░█░█░░░░░
-// ░░░░░░█░█░░░▀░░░░░░▀░░░█░█░░░░░
-// ░░░░░░█░█░░░░▀░░░░▀░░░░█░█░░░░░
-// ░░░░░░█░█▄░░░░▀░░▀░░░░▄█░█░░░░░
-// ░░░░░░█░█░░░░░░██░░░░░░█░█░░░░░
-// ░░░░░░█░▀░░░░░░░░░░░░░░▀░█░░░░░
-// ░░░░░░█░░░░░░  ░░░░░  ░░░█░░░░░
-// ░░░░░░█░░░░░░ ░ ░░░ ░ ░░░█░░░░░
-// ░░░░░░▀░░░░░░ ░░ ░ ░░ ░░░▀░░░░░
-// ░░░░░░░░░░░░░ ░░░ ░░░ ░░░░░░░░░
- 
-#include<bits/stdc++.h>
-
-#define f0(i,n) for(long long int i=0;i<n;i++)
-#define f1(i,n) for(int i=1;i<=n;i++)
-#define f2(i,n) for(int i=2;i<=n;i++)
-#define rf(j,n) for(int j=n-1;j>0;j--)
-#define ll long long int
-#define next cout<<endl
- 
+#include <bits/stdc++.h>
 using namespace std;
 
+#define fastio ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+#define fr(i,x,y) for(int i=x;i<y;i++)
 
-int max(int a,int b)
-{
-    int ans = (a>=b)?a:b;
-    return ans;
-}
-
-int min(int a,int b)
-{
-    int ans = (a<=b)?a:b;
-    return ans;
-}
-int main() 
-{	
-	int t;
-	cin >> t;
-	while(t--)
+int main() {
+    fastio;
+    int t,s,w[3];
+    cin>>t;
+    while(t--)
     {
-        int s,w1,w2,w3,sum=0,ans=1;
-        cin>>s>>w1>>w2>>w3;
-        sum=w1+w2+w3;
-        if(s>=sum)
-        ans=1;
-        else
+        int l=0,r=2;
+        cin>>s;
+        fr(i,0,3){cin>>w[i];}
+        int hit=0;
+        while(l<=r)
         {
-            if((w1==1) && (w2==1) && (w3==1))
-            {
-                if(s==1)
-                ans=3;
-                else if(s==2)
-                ans=2;
-            }
-            else if((w1==1) && (w2==1) && (w3==2))
-            {
-                if(s==2 ||s==3)
-                ans=2;
-            }
-            else if((w1==1) && (w2==2) && (w3==2))
-            {
-                if(s==2)
-                ans=3;
-                else if(s==3)
-                ans=2;
-                else if(s==4)
-                ans=2;
-            }
-            else if((w1==1) && (w2==2) && (w3==1))
-            {
-                if(s==2)
-                ans=3;
-                else if(s==3)
-                ans=2;
-            }
-            else if((w1==2) && (w2==1) && (w3==1))
-            {
-                if(s==2 || s==3)
-                ans=2;
-            }
-            else if((w1==2) && (w2==1) && (w3==2))
-            {
-                if(s==2)
-                ans=3;
-                else if(s==3 || s==4)
-                ans=2;
-            }
-            else if((w1==2) && (w2==2) && (w3==1))
-            {
-                if(s==2)
-                ans=3;
-                else if(s==3 || s==4)
-                ans=2;
-            }
-            else if((w1==2) && (w2==2) && (w3==2))
-            {
-                if(s==5 ||s==4)
-                ans=2;
-                else if(s==3 || s==2)
-                ans=3;
-
-            }
+            int t1=0,t2=0;
+            int tl=l,tr=r;
+            while(tl<=r && (t1+=w[tl])<=s){tl++;}
+            while(tr>=l && (t2+=w[tr])<=s){tr--;}
+            if(tl-l >=r-tr)
+            {l=tl;}
+            else
+            {r=tr;}
+            hit++;
         }
-        cout<<ans<<endl;    
-	}	
+        cout<<hit<<endl;
+    }
 	return 0;
 }
